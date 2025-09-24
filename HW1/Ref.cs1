@@ -1,0 +1,408 @@
+﻿using System;
+
+public static void basicWrite()
+{
+    Console.WriteLine("Line 1");
+    Console.WriteLine("Line 2");
+    Console.WriteLine("Line 3");
+    Console.WriteLine("------");
+    Console.WriteLine();
+
+    Console.Write("Line 1");
+    Console.Write("Line 2");
+    Console.Write("Line 3");
+    Console.WriteLine("------");
+    Console.WriteLine();
+    Console.WriteLine();
+
+    Console.WriteLine("123");
+    Console.Write("456");
+    Console.Write("789");
+    Console.WriteLine("ABC");
+    Console.WriteLine("DEF");
+    Console.WriteLine("------");
+
+    Console.Write("Line 1\n");
+    Console.Write("Line 2\n");
+    Console.Write("Line 3\n");
+    Console.WriteLine("------");
+}
+
+public static void stringAndNumber()
+{
+    Console.WriteLine(123 + 456);
+
+    Console.WriteLine(123 + "456");
+    Console.WriteLine("123" + 456);
+    Console.WriteLine("123" + "456");
+}
+
+public static void stringOperation()
+{
+    string msg = "This is a string";
+    string msg2 = " This is  another   string  ";
+
+    Console.WriteLine(msg);
+    string[] items = msg.Split();
+    foreach (string item in items)
+    {
+        Console.WriteLine("|" + item + "|");
+    }
+    Console.WriteLine();
+
+    items = msg2.Split();
+    foreach (string item in items)
+    {
+        Console.WriteLine("|" + item + "|");
+    }
+    Console.WriteLine();
+
+    items = msg2.Split("\\s+");
+    foreach (string item in items)
+    {
+        Console.WriteLine("|" + item + "|");
+    }
+}
+
+public static void readInput()
+{
+    Console.Write("Your name:");
+    string inp = Console.ReadLine();
+    Console.WriteLine(inp);
+}
+
+// the order: [public] [static] dataType fun_name(parameter_listing) { }
+public static void formatedWrite()
+{
+    int i = 123;
+    float f = 3.456f;
+    string s = "abc";
+
+    // Console.WriteLine, output directly
+    Console.WriteLine("    |1234567|");
+    Console.WriteLine("i = |{0}|", i);
+    Console.WriteLine("i = |{0, 05}|", i);
+    Console.WriteLine("i = |{0:d7}|", i);
+    Console.WriteLine("i = |{0:d5}|", i);
+    Console.WriteLine();
+    // without $ symbol, can be used to generate the string with specified format
+    Console.WriteLine(string.Format("    |1234567|"));
+    Console.WriteLine(string.Format("i = |{0}|", i));
+    Console.WriteLine(string.Format("i = |{0, 5}|", i));  // , width
+    Console.WriteLine(string.Format("i = |{0:X4}|", i));  // :format
+    Console.WriteLine(string.Format("i = |{0:d7}|", i));
+    Console.WriteLine(string.Format("i = |{0:d5}|", i));
+    Console.WriteLine();
+    // : 表示緊接著; 
+    Console.WriteLine(string.Format("f = {0}", f));
+    Console.WriteLine(string.Format("f = {0:f1}", f));
+    Console.WriteLine(string.Format("f = {0:f2}", f));
+    Console.WriteLine(string.Format("f = {0:f3}", f));
+    Console.WriteLine(string.Format("f = {0:f4}", f));
+    Console.WriteLine(string.Format("s = {0:8}", s));
+    // with $ sumbol,
+    Console.WriteLine();
+    Console.WriteLine($"f = {f}");
+    Console.WriteLine($"f = {f:f1}");
+    Console.WriteLine($"f = {f:f2}");
+    Console.WriteLine($"f = {f:f3}");
+    Console.WriteLine($"f = {f:f4}");
+    Console.WriteLine($"s = {f:8}");
+}
+
+public static void aboutArray_1()
+{
+    int[] ary = { 1, 2, 3, 4, 5, };   // 陣列最後面的逗點會被忽略，不影響其長度！
+    Console.WriteLine(ary.Length);
+
+    for (int i = 0; i < ary.Length; i++)
+    {
+        Console.WriteLine(ary[i]);
+    }
+    Console.WriteLine();
+    foreach (int it in ary)
+    {
+        Console.WriteLine(it);
+    }
+}
+
+public static void table9x9()
+{
+    for (int r = 1; r <= 9; r++)
+    {
+        for (int c = 1; c <= 9; c++)
+        {
+            if (c == 1)
+            {
+                Console.Write($"{r}x{c}={r * c} ");
+            }
+            else
+            {
+                Console.Write($"{r}x{c}={r * c,2} ");
+            }
+        }
+        Console.WriteLine();
+    }
+}
+
+public static void table9x9Str()
+{
+    string result = "table 9x9 string version:";
+    for (int r = 1; r <= 9; r++)
+    {
+        result += "\n";
+        for (int c = 1; c <= 9; c++)
+        {
+            if (c == 1)
+            {
+                result += $"{r}x{c}={r * c} ";
+            }
+            else
+            {
+                result += $"{r}x{c}={r * c,2} ";
+            }
+        }
+    }
+    Console.WriteLine(result);
+}
+
+public static void aboutArray_2()
+{
+    /*
+    物件變數 與 物件 的關係，就好比
+    公車駕駛 與 公車。
+    公車駕駛拿到公車的鑰匙後，就可以去開那輛公車！
+    只要有該輛公車鑰匙的駕駛，都能夠取開那輛公車。
+     */
+    //*/
+    // 陣列也是物件！
+    // 宣告陣列變數，並指定陣列資料: 招考進駕駛，並指定要開的公車。
+    int[] ary = new int[] { 1, 2, 3, 4 };
+    // int[] ary = {1, 2, 3, 4};  // 簡寫形式！
+
+    // 宣告陣列變數，並指定初值:
+    int[] ary = { 1, 2, 3, 4, 5, };   // 陣列最後面的逗點會被忽略，不影響其長度！
+
+    int[] aryToo;  // 先招考進駕駛。
+
+    for (int i = 0; i < ary.Length; i++)
+    {
+        Console.WriteLine(ary[i]);
+    }
+    Console.WriteLine();
+
+    // 再指向陣列資料: (稍後配給公車，且要是一輛公車)
+    aryToo = ary;  // 指向或參考到 ary 所參考的物件！
+    aryToo[1] = 99;
+
+    for (int i = 0; i < ary.Length; i++)
+    {
+        Console.WriteLine(ary[i]);
+    }
+    Console.WriteLine();
+
+    int[] ary2;
+    //ary2 = { 2, 4, 6, 8};  // NG! 非建立物件形式。
+    ary2 = new int[] { 2, 4, 6, 8 };   // 建立一個陣列物件。
+
+    foreach (int it in ary2)
+    {
+        Console.WriteLine(it);
+    }
+}
+
+public static void aboutArray2d()
+{
+    // 二維矩形陣列的寫法:
+    int[,] ary2d = { { 1, 2, 3 }, { 4, 5, 6 } };  // 陣列最後面的逗點會被忽略，不影響其長度！
+
+    Console.WriteLine($"ary2d.Length = {ary2d.Length}\n" +
+                      $"ary2d.GetLength(0) = {ary2d.GetLength(0)}\n" +
+                      $"ary2d.GetLength(1) = {ary2d.GetLength(1)}\n"
+                      );
+
+    for (int r = 0; r < ary2d.GetLength(0); r++)
+    {
+        for (int c = 0; c < ary2d.GetLength(1); c++)
+        {
+            Console.Write($"{ary2d[r, c]} ");
+        }
+        Console.WriteLine();
+    }
+    Console.WriteLine();
+}
+
+public static void aboutArray2d_1()
+{
+    // 二維矩形陣列的寫法:
+    int[,] ary2d = { { 1, 2, 3 }, { 4, 5, 6 } };
+    Console.WriteLine($"ary2d.Length = {ary2d.Length}\n" +
+                      $"ary2d.GetLength(0) = {ary2d.GetLength(0)}\n" +
+                      $"ary2d.GetLength(1) = {ary2d.GetLength(1)}\n"
+                      );
+
+    for (int r = 0; r < ary2d.GetLength(0); r++)
+    {
+        for (int c = 0; c < ary2d.GetLength(1); c++)
+        {
+            Console.Write($"{ary2d[r, c]} ");
+        }
+        Console.WriteLine();
+    }
+    Console.WriteLine();
+}
+
+public static void aboutArray2d_2()
+{
+    // Jagged Array 的寫法:
+    int[,] ary2d = { { 1, 2, 3 }, { 4, 5, 6 } };
+
+    int[][] jagged1 = new int[2][];
+
+    int[][] jagged2 = { new int[] { 1, 2, 3 },
+                            new int[] { 4, 5, 6, 7, 8 },
+                            new int[] {9, 10 }
+        };
+
+    jagged1[0] = jagged2[0];
+    jagged1[1] = jagged2[1];
+
+    for (int r = 0; r < jagged2.Length; r++)
+    {
+        for (int c = 0; c < jagged2[r].Length; c++)
+        {
+            Console.Write($"{jagged2[r][c]} ");
+        }
+        Console.WriteLine();
+    }
+    Console.WriteLine();
+}
+
+public static void guessNumber()
+{
+    Random rand = new Random();
+    int left = 1, right = 99;
+    int answer = rand.Next(2, 98);
+    int guess;
+
+    string inp;
+
+    while (true)
+    {
+        // ... 
+    }
+}
+
+
+public static void structureDemo()
+{
+    // 會自動以第一列的內容，做為參考的標準:
+    string mulstr = """
+            item 1
+            
+             item 2
+              item 3
+            """;
+    Console.WriteLine(mulstr);
+    //---------------------------------------
+    string data = """
+            成婉財 27 91 21 33 13
+            翁雅婷 96 90 40 55 69
+            袁維茹 38 85 72 13 34
+            黃士哲 81 40 24 93 79
+            郭珮珊 72 33 32 83 73
+            陳儀琬 78 55 22 41 62
+            李碧彥 30 48 13 93 70
+            梁健玉 23 89 10 44 24
+            許雅淑 90 11 33 27 67
+            蕭宛新 29 64 64 90 43
+            """;
+
+    string[] st = "1 2 3 4".Split();
+    Console.WriteLine(st.Length);
+		for (string it in st)
+    {
+        Console.WriteLine(it);
+    }
+
+    string[] items = data.Trim().Split('\n');
+    foreach (string it in items)
+    {
+        Console.WriteLine(it);
+    }
+    Score[] scores = new Score[items.Length];
+    for (int i = 0; i < items.Length; ++i)
+    {
+        string[] fields = items[i].Split();
+
+        //Console.WriteLine(fields[0]);
+        Score s = new Score(fields[0], fields.Length - 1);
+        for (int j = 1; j < fields.Length; ++j)
+        {
+            Console.WriteLine(fields[j]);
+            int num;
+            if (int.TryParse(fields[j], out num))
+            {
+                //Console.WriteLine($"Parsed successfully: {num}");
+            }
+            else
+            {
+                Console.WriteLine($"Could not parse '{fields[j]}'"); // Output: Could not parse 'abc'
+            }
+
+            s.score[j - 1] = num;
+        }
+        //scores[i] = s;
+        s.show();
+    }
+}
+
+//-------------------------------------------------------	
+// class and structure    
+
+class OperationDemo
+{
+    public OperationDemo()
+    {
+        Operation1();
+    }
+
+    public void Operation1()
+    {
+        int a = 3, b = 2;
+
+        Console.WriteLine($"a = {a}, b = {b},");
+        Console.WriteLine($"{a} + {b} = {a + b}");
+        Console.WriteLine($"{a} - {b} = {a - b}");
+        Console.WriteLine($"{a} * {b} = {a * b}");
+        Console.WriteLine($"{a} / {b} = {a / b} => int");
+        Console.WriteLine($"{a} / {b} = {(float)a / b} => float");
+        Console.WriteLine($"{a} / {b} = {a / (float)b} => float");
+        Console.WriteLine($"{a} / {b} = {(float)(a / b)} => float, but too late to transform");
+        Console.WriteLine($"{a} % {b} = {a % b}");
+    }
+}
+
+struct Score
+{
+    // data members:
+    string name;
+    int[] score;
+    //public string name;
+    //public int[] score;
+
+    // constructor:
+    public Score(string name, int n)
+    {
+        this.name = name;
+        score = new int[n];
+    }
+
+    // member function:
+    public void show()
+    {
+        Console.Write(name);
+        foreach (int s in score)
+            Console.Write($" {s}");
+    }
+}
