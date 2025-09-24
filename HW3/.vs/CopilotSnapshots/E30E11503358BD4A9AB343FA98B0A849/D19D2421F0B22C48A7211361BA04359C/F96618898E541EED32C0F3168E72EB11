@@ -1,0 +1,77 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading.Tasks;
+
+
+namespace HW3
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            int side = 5; // or let user choose
+            Random rand = new Random(); // Shared Random instance
+            Bingo playerBingo = new Bingo(side, rand);
+            Bingo cpuBingo = new Bingo(side, rand);
+
+            playerBingo.reset();
+            cpuBingo.reset();
+
+            while (true)
+            {
+                Console.WriteLine("Your Bingo Board:");
+                playerBingo.show();
+
+                Console.WriteLine("CPU Bingo Board:");
+                cpuBingo.show();
+
+                Console.Write($"\nInput a number (1~{side * side}, or 0 to quit): ");
+                string inp = Console.ReadLine();
+                if (inp == null || inp.Trim() == "0")
+                {
+                    Console.WriteLine("Quit Bingo game!");
+                    break;
+                }
+
+                int k;
+                if (!int.TryParse(inp, out k) || k < 1 || k > side * side)
+                {
+                    Console.WriteLine("Invalid input!");
+                    continue;
+                }
+
+                playerBingo.markCell(k);
+                cpuBingo.markCell(k);
+
+                // CPU turn: pick a random unmarked number for itself
+                int cpuPick;
+                do
+                {
+                    cpuPick = rand.Next(1, side * side + 1);
+                } while (cpuBingo.chkcell(cpuPick));
+                Console.WriteLine($"CPU marks number: {cpuPick}");
+                cpuBingo.markCell(cpuPick);
+                playerBingo.markCell(cpuPick);
+
+                // Check for win
+                if (playerBingoCompleted(playerBingo, side) || playerBingoCompleted(cpuBingo, side))
+                {
+                    Console.WriteLine("Game over!");
+                    Console.WriteLine("Your Bingo Board:");
+                    playerBingo.show();
+                    Console.WriteLine("CPU Bingo Board:");
+                    cpuBingo.show();
+                    break;
+                }
+            }
+        }
+
+        static bool playerBingoCompleted(Bingo bingo, int side)
+        {
+            return typeof(Bingo).GetField("lines", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).GetValue(bingo) is int lines && lines >= side;
+        }
+    }
+}

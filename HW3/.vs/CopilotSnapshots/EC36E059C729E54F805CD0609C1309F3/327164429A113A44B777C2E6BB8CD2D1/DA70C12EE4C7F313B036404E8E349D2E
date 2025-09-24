@@ -1,0 +1,92 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HW3
+{
+    class Game1A2B
+    {
+        private string[] nos = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+        private int numberLen;
+        private string answer = "";
+
+        // 建構函式，決定遊戲數字的位數(N):
+        public Game1A2B(int N)
+        {
+            numberLen = N;
+        }
+
+        // 回傳指定長度且符合規則的數字:
+        public string GenNumber(int n)
+        {
+            if (n < 1 || n > 10)
+            {
+                return ""; // 不合理的長度
+            }
+            // Copy nos to a new array for shuffling
+            string[] digits = (string[])nos.Clone();
+            Shuffle(digits); // Use the Shuffle method
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < n; i++)
+            {
+                sb.Append(digits[i]);
+            }
+            return sb.ToString();
+
+
+        }
+
+        // 檢視給定的number字串，是不是符合規則的數字字串:
+        public bool IsAvailable(string number)
+        {
+            HashSet<char> digits = new HashSet<char>();
+            foreach (char c in number)
+            {
+                if (digits.Contains(c))
+                {
+                    return false; // 重複數字
+                }
+                digits.Add(c);
+            }
+            return true;
+        }
+
+        // 回傳比較 guess 與 answer 是 幾A幾B 的結果:
+        public int[] GetAB(string guess, string answer)
+        {
+            int[] ab = { 0, 0 }; // ab[0] for a; ab[1] for b.
+            foreach (char c in guess)
+            {
+                if (answer.Contains(c))
+                {
+                    if (guess.IndexOf(c) == answer.IndexOf(c))
+                    {
+                        ab[0]++; // A
+                    }
+                    else
+                    {
+                        ab[1]++; // B
+                    }
+                }
+            }
+
+            return ab;
+        }
+
+        // 洗牌的程式，協助生成符合規則的數字:
+        public void Shuffle(string[] number)
+        {
+            int n = number.Length;
+            Random rand = new Random();
+            for (int i = n - 1; i > 0; i--)
+            {
+                int j = rand.Next(0, i + 1);
+                string tmp = number[i];
+                number[i] = number[j];
+                number[j] = tmp;
+            }
+        }
+    }
+}
