@@ -89,14 +89,14 @@ namespace HW6
                 shapes.Clear();
             }
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 6; i++)
             {
                 Gensquare();
             }
-            //for (int i = 0; i < 6; i++)
-            //{
-            //    GenCirce();
-            //}
+            for (int i = 0; i < 6; i++)
+            {
+                GenCirce();
+            }
             animationTimer.Start();
         }
 
