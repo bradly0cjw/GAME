@@ -89,14 +89,14 @@ namespace HW6
                 shapes.Clear();
             }
 
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 10; i++)
             {
                 Gensquare();
             }
-            for (int i = 0; i < 6; i++)
-            {
-                GenCirce();
-            }
+            //for (int i = 0; i < 6; i++)
+            //{
+            //    GenCirce();
+            //}
             animationTimer.Start();
         }
 
@@ -198,6 +198,7 @@ namespace HW6
         {
             Graphics g = e.Graphics;
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            g.Clear(Color.White);
             foreach (var shape in shapes)
             {
                 using (Pen pen = new Pen(shape.c))

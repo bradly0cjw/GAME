@@ -1,8 +1,0 @@
-C:\Users\CYPONE\Documents\GitHub\GAME\HW2\bin\Debug\HW2.exe.config
-C:\Users\CYPONE\Documents\GitHub\GAME\HW2\bin\Debug\HW2.exe
-C:\Users\CYPONE\Documents\GitHub\GAME\HW2\bin\Debug\HW2.pdb
-C:\Users\CYPONE\Documents\GitHub\GAME\HW2\obj\Debug\HW2.csproj.AssemblyReference.cache
-C:\Users\CYPONE\Documents\GitHub\GAME\HW2\obj\Debug\HW2.csproj.CoreCompileInputs.cache
-C:\Users\CYPONE\Documents\GitHub\GAME\HW2\obj\Debug\HW2.exe
-C:\Users\CYPONE\Documents\GitHub\GAME\HW2\obj\Debug\HW2.pdb
-C:\Users\CYPONE\Documents\GitHub\GAME\HW2\obj\Debug\HW2.exe.config

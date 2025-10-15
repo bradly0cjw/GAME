@@ -1,8 +1,0 @@
-C:\Users\LINBEI\Documents\GitHub\NTUT\GAME\HW3\obj\Debug\HW3.csproj.AssemblyReference.cache
-C:\Users\LINBEI\Documents\GitHub\NTUT\GAME\HW3\obj\Debug\HW3.csproj.CoreCompileInputs.cache
-C:\Users\LINBEI\Documents\GitHub\NTUT\GAME\HW3\bin\Debug\HW3.exe.config
-C:\Users\LINBEI\Documents\GitHub\NTUT\GAME\HW3\bin\Debug\HW3.exe
-C:\Users\LINBEI\Documents\GitHub\NTUT\GAME\HW3\bin\Debug\HW3.pdb
-C:\Users\LINBEI\Documents\GitHub\NTUT\GAME\HW3\obj\Debug\HW3.exe
-C:\Users\LINBEI\Documents\GitHub\NTUT\GAME\HW3\obj\Debug\HW3.pdb
-C:\Users\LINBEI\Documents\GitHub\NTUT\GAME\HW3\obj\Debug\HW3.exe.config
