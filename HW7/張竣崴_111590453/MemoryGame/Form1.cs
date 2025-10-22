@@ -26,6 +26,7 @@ namespace MemoryGame
         int[] flippedCard;
         float scale;
         int prev_card_index;
+        bool isChecking = false;
         public Form1()
         {
             InitializeComponent();
@@ -72,11 +73,11 @@ namespace MemoryGame
             }
             return cards;
         }
-        
-        public void drawCardsbyFlipState(Graphics g , float scale)
+
+        public void drawCardsbyFlipState(Graphics g, float scale)
         {
             // Draw card front if flippedCard is 1, otherwise draw back
-           
+
             for (int i = 0; i < cards_in_col; i++)
             {
                 for (int j = 0; j < cards_in_row; j++)
@@ -118,7 +119,7 @@ namespace MemoryGame
         {
             // calculate scale to fit cards in panel
             scale = Math.Min(
-                (float)(panel_board.Width - (cards_in_row - 1) * gap) / (cards_in_row * card_width), 
+                (float)(panel_board.Width - (cards_in_row - 1) * gap) / (cards_in_row * card_width),
                 (float)(panel_board.Height - (cards_in_col - 1) * gap) / (cards_in_col * card_height));
             // draw cards
             int total_cards = cards_in_row * cards_in_col;
@@ -129,12 +130,35 @@ namespace MemoryGame
 
         }
 
+        //private void panel_board_MouseClick(object sender, MouseEventArgs e)
+        //{
+        //    if (cards == null) return;
+        //    //get clicked card index
+        //    int col = (int)(e.X / (card_width * scale + gap));
+        //    int row = (int)(e.Y / (card_height * scale + gap));
+        //    // check if click out of bounds
+        //    if (col >= cards_in_row || row >= cards_in_col)
+        //    {
+        //        return;
+        //    }
+
+        //    int index = row * cards_in_row + col;
+        //    int total_cards = cards_in_row * cards_in_col;
+        //    if (index >= 0 && index < total_cards)
+        //    {
+        //        flippedCard[index] = flippedCard[index] == 1 ? 0 : 1;
+        //        panel_board.Invalidate();
+        //    }
+        //}
+
         private void panel_board_MouseClick(object sender, MouseEventArgs e)
         {
-            if (cards == null) return;
+            if (cards == null || isChecking) return;
+
             //get clicked card index
             int col = (int)(e.X / (card_width * scale + gap));
             int row = (int)(e.Y / (card_height * scale + gap));
+
             // check if click out of bounds
             if (col >= cards_in_row || row >= cards_in_col)
             {
@@ -143,9 +167,49 @@ namespace MemoryGame
 
             int index = row * cards_in_row + col;
             int total_cards = cards_in_row * cards_in_col;
-            if (index >= 0 && index < total_cards)
+
+            if (index >= 0 && index < total_cards && flippedCard[index] == 0)
             {
-                flippedCard[index] = flippedCard[index] == 1 ? 0 : 1;
+                flippedCard[index] = 1;
+                panel_board.Invalidate();
+
+                if (prev_card_index == -1)
+                {
+                    // This is the first card flipped in a turn
+                    prev_card_index = index;
+                }
+                else
+                {
+                    // This is the second card flipped, check for a match
+                    if (cards[prev_card_index] == cards[index])
+                    {
+                        // It's a match
+                        prev_card_index = -1; // Reset for the next pair
+                    }
+                    else
+                    {
+                        // Not a match, flip them back after a delay
+                        isChecking = true; // Prevent clicks during the delay
+                        Timer timer = new Timer();
+                        timer.Interval = 1000; // 1 second
+                        timer.Tick += (s, ev) =>
+                        {
+                            flippedCard[prev_card_index] = 0;
+                            flippedCard[index] = 0;
+                            panel_board.Invalidate();
+                            prev_card_index = -1;
+                            isChecking = false; // Allow clicks again
+                            timer.Stop();
+                            timer.Dispose();
+                        };
+                        timer.Start();
+                    }
+                }
+            }
+            else if (flippedCard[index] == 1 && prev_card_index == index)
+            {
+                flippedCard[index] = 0;
+                prev_card_index = -1;
                 panel_board.Invalidate();
             }
         }
